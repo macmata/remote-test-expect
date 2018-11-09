@@ -13,11 +13,22 @@ module RubyExpect
       !r.nil?
     end
 
-    def cmd(cmd, expected)
+    def cmd(cmd, expected, timeout = 0.1)
       send cmd
-      sleep(0.1)
+      sleep(timeout)
       r = expect expected
       !r.nil?
+    end
+
+    def exit()
+      send "exit"
+      r = expect "logout"
+      !r.nil?
+    end
+
+    def clear()
+      send " "
+      send " "
     end
 
     def test?(test)
